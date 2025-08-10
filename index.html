@@ -3,91 +3,229 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yasser GTM AI</title>
+  <title>Yasser GTM AI — e& B2B</title>
   <style>
-    :root { --pad: 16px; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; }
-    h1 { margin-bottom: 10px; }
-    .row { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
-    textarea { width: 100%; height: 160px; padding: var(--pad); border-radius: 10px; border: 1px solid #ddd; }
-    pre { white-space: pre-wrap; background:#f6f6f6; padding: var(--pad); border-radius: 10px; border: 1px solid #eee; }
-    button { padding: 10px 16px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; }
-    select, input { padding: 8px; border-radius: 10px; border: 1px solid #ddd; }
-    .right { margin-left: auto; }
+    :root{
+      --bg:#0f172a;           /* slate-900 */
+      --card:#0b1226;         /* deep card */
+      --muted:#94a3b8;        /* slate-400 */
+      --text:#e2e8f0;         /* slate-200 */
+      --accent:#16a34a;       /* green-600 */
+      --accent-2:#22d3ee;     /* cyan-400 */
+      --border:#1f2a44;
+      --radius:14px;
+      --pad:16px;
+      --max:980px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #0b2a2a55, transparent 60%),
+        radial-gradient(800px 500px at 120% -20%, #0a1a3a55, transparent 60%),
+        var(--bg);
+      color:var(--text);
+      font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      display:flex; align-items:flex-start; justify-content:center; padding:28px;
+    }
+    .app{width:100%; max-width:var(--max);}
+    .header{
+      display:flex; align-items:center; gap:14px; margin-bottom:18px;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:var(--shadow);
+    }
+    h1{font-size:22px;margin:0}
+    .sub{color:var(--muted); font-size:13px}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .row{display:flex; gap:12px; align-items:center; padding:var(--pad); border-top:1px solid var(--border)}
+    .row:first-child{border-top:0}
+
+    label{font-size:14px; color:var(--muted)}
+    select,input,textarea,button{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#0a1226;
+      color:var(--text);
+    }
+    select,input{padding:10px 12px}
+    textarea{width:100%; min-height:160px; padding:14px}
+    .actions{display:flex; gap:10px; margin-left:auto}
+    button{
+      padding:10px 14px; cursor:pointer;
+      transition:.2s transform ease, .2s opacity ease;
+    }
+    button.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#041016; border:0; font-weight:600;
+    }
+    button:disabled{opacity:.6; cursor:not-allowed}
+    .pill{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 10px; border-radius:999px; font-size:12px;
+      background:#081028; border:1px solid var(--border); color:var(--muted);
+    }
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .grid > div{display:flex; gap:8px; align-items:center}
+    .response{
+      padding:var(--pad); background:#070f22; border-top:1px solid var(--border);
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap; min-height:140px;
+    }
+    .hint{font-size:12px; color:var(--muted)}
+    .right{margin-left:auto}
   </style>
 </head>
 <body>
-  <h1>Yasser GTM AI</h1>
+  <div class="app">
+    <div class="header">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Yasser GTM AI — e&amp; B2B UAE</h1>
+        <div class="sub">Sales-focused copilot for Business Pro, uTap, mobile, fixed, security &amp; events.</div>
+      </div>
+      <span class="pill right" id="sessionTag">session…</span>
+    </div>
 
-  <!-- Presets for one-click convenience -->
-  <div class="row">
-    <label for="preset">Quick prompt</label>
-    <select id="preset">
-      <option value="">Choose…</option>
-      <option>Give me a two week GTM plan to launch uTap for F&B SMBs in Dubai.</option>
-      <option>Propose three CAPEX friendly ideas to upsell cybersecurity to our SME IoT customers.</option>
-      <option>Create a bilingual WhatsApp sequence for postpaid onboarding that cross sells eLife.</option>
-      <option>Compare our business mobile plans to du and list three differentiators to push.</option>
-      <option>Outline a one page sales kit for selling IoT fleet management to logistics SMEs in KSA.</option>
-    </select>
-    <button id="usePreset">Use</button>
+    <div class="card">
+      <!-- Presets -->
+      <div class="row grid">
+        <div>
+          <label for="preset">Quick prompt</label>
+          <select id="preset">
+            <option value="">Choose…</option>
+            <option>Output type: SALES PLAY. 25-user office. Compare Business Pro 300 vs 1 Gbps; include Wi-Fi 6, M365, static IP; AED ranges; next 3 steps.</option>
+            <option>Output type: SALES PLAY. Retail chain (3 branches) needs faster checkout, footfall analytics, stable Wi-Fi. Use Business Pro, uTap, Wi-Fi 6, CCTV analytics; quick wins in 30 days.</option>
+            <option>Output type: EVENT PLAY. Plan a GITEX booth to showcase Business Pro, uTap, Wi-Fi 6. Objectives, demos, partners, budget band, KPIs, next 3 steps.</option>
+            <option>Output type: PARTNERSHIP PLAY. Co-sell merchant services with a major bank using uTap. Offer, simple commercial, activation, KPIs, next 3 steps.</option>
+            <option>What is e&amp; Business Pro for SMEs. Give definition, 4 key features, who it suits, common add-ons, next 3 steps.</option>
+          </select>
+          <button id="usePreset">Use</button>
+        </div>
+        <div class="right" style="justify-content:flex-end">
+          <label class="pill"><input type="checkbox" id="force" style="accent-color:#16a34a; transform:translateY(1px)"> Force full answer (no questions)</label>
+        </div>
+      </div>
+
+      <!-- Prompt -->
+      <div class="row">
+        <textarea id="prompt" placeholder="Type your request here…"></textarea>
+      </div>
+
+      <!-- Controls -->
+      <div class="row">
+        <div class="grid" style="width:100%">
+          <div>
+            <label for="lang">Language</label>
+            <select id="lang">
+              <option value="en" selected>English first, then Arabic</option>
+              <option value="ar">Arabic first, then English</option>
+            </select>
+          </div>
+          <div class="actions" style="justify-content:flex-end">
+            <button id="copy" title="Copy response">Copy</button>
+            <button id="clear">Clear</button>
+            <button id="send" class="primary">Send ⏎</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Response -->
+      <div class="response" id="out">Waiting…</div>
+      <div class="row" style="justify-content:space-between">
+        <span class="hint">Tip: Press <b>Ctrl/⌘ + Enter</b> to send.</span>
+        <span class="hint" id="status">Ready</span>
+      </div>
+    </div>
   </div>
-
-  <div class="row">
-    <textarea id="prompt" placeholder="Type your request here"></textarea>
-  </div>
-
-  <div class="row">
-    <label for="lang">Language</label>
-    <select id="lang">
-      <option value="en" selected>English first, then Arabic</option>
-      <option value="ar">Arabic first, then English</option>
-    </select>
-    <button id="send">Send</button>
-  </div>
-
-  <h3>Response</h3>
-  <pre id="out">Waiting…</pre>
 
   <script>
-    // Your actual Make.com Custom Webhook URL
-    const WEBHOOK = "https://hook.eu2.make.com/x60u6br2yxb4t1413jo6et0hikvrmnv5";
+  // --- Configure your Make Webhook URL ---
+  const HOOK_URL = "https://hook.eu2.make.com/x60u6br2yxb4t1413jo6et0hikvrmnv5";
 
-    const SECRET = "YASSER123"; // optional shared secret
+  // Reuse a session across page loads so the Agent can keep context if you enable Thread ID mapping.
+  const sessionId = sessionStorage.getItem("yasser_session") || `yasser-ui-${Date.now()}`;
+  sessionStorage.setItem("yasser_session", sessionId);
+  document.getElementById("sessionTag").textContent = sessionId;
 
-    function setOut(text) {
-      document.getElementById("out").textContent = text;
+  const $ = (id) => document.getElementById(id);
+  const setOut = (t) => $("out").textContent = t;
+  const setStatus = (t) => $("status").textContent = t;
+
+  $("usePreset").addEventListener("click", () => {
+    const p = $("preset").value;
+    if (p) $("prompt").value = p;
+    $("prompt").focus();
+  });
+
+  $("copy").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText($("out").textContent || "");
+      setStatus("Copied ✓");
+      setTimeout(()=>setStatus("Ready"), 1200);
+    } catch { setStatus("Copy failed"); }
+  });
+
+  $("clear").addEventListener("click", () => {
+    $("prompt").value = "";
+    setOut("Waiting…");
+    setStatus("Cleared");
+  });
+
+  async function send() {
+    const raw = $("prompt").value.trim();
+    if (!raw) { setOut("Please enter a prompt."); return; }
+
+    const lang = $("lang").value;
+    const force = $("force").checked;
+
+    // Optional directive to stop the Agent from asking questions
+    const directive = "Do not ask clarifying questions. Use Default Assumptions and proceed. Output type defaults to SALES PLAY unless I specify another type. Prompt: ";
+    const prompt = force ? (directive + raw) : raw;
+
+    // Disable buttons while sending
+    $("send").disabled = $("clear").disabled = $("copy").disabled = true;
+    setStatus("Sending…");
+    setOut("Working…");
+
+    try {
+      const res = await fetch(HOOK_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt,
+          lang,
+          session_id: sessionId
+        })
+      });
+
+      const text = await res.text(); // your Make Webhook Response returns text/plain
+      setOut(text || "(empty response)");
+      setStatus(res.ok ? "Done" : `HTTP ${res.status}`);
+    } catch (err) {
+      setOut("Network error: " + err.message + "\n\nTip: ensure your Make scenario is ON (Run once or Immediately as data arrives).");
+      setStatus("Error");
+    } finally {
+      $("send").disabled = $("clear").disabled = $("copy").disabled = false;
     }
+  }
 
-    document.getElementById("usePreset").addEventListener("click", () => {
-      const p = document.getElementById("preset").value;
-      if (p) document.getElementById("prompt").value = p;
-    });
-
-    document.getElementById("send").addEventListener("click", async () => {
-      const prompt = document.getElementById("prompt").value.trim();
-      const lang = document.getElementById("lang").value;
-
-      if (!prompt) { setOut("Please enter a prompt."); return; }
-      setOut("Working…");
-
-      try {
-        const res = await fetch(WEBHOOK, {
-          method: "POST",
-          mode: "cors",
-          headers: { "Content-Type": "text/plain; charset=utf-8" }, // avoids preflight
-          body: JSON.stringify({ prompt, lang, secret: SECRET })
-        });
-
-        const text = await res.text();
-        let data;
-        try { data = JSON.parse(text); } catch { data = text; }
-
-        setOut(typeof data === "string" ? data : JSON.stringify(data, null, 2));
-      } catch (e) {
-        setOut("Network error. " + e.message);
-      }
-    });
+  $("send").addEventListener("click", send);
+  $("prompt").addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") send();
+  });
   </script>
 </body>
 </html>
+
