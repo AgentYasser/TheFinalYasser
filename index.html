@@ -84,6 +84,23 @@
     }
     .hint{font-size:12px; color:var(--muted)}
     .right{margin-left:auto}
+
+    /* Keep the Send button visible on phones + make room for it */
+    @media (max-width: 640px) {
+      #send {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 999;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      }
+      .response { padding-bottom: 84px; }
+      textarea { min-height: 120px; }
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -123,7 +140,7 @@
       </div>
 
       <!-- Controls -->
-      <div class="row">
+      <div class="row" id="controlsRow">
         <div class="grid" style="width:100%">
           <div>
             <label for="lang">Language</label>
@@ -143,7 +160,7 @@
       <!-- Response -->
       <div class="response" id="out">Waiting…</div>
       <div class="row" style="justify-content:space-between">
-        <span class="hint">Tip: Press <b>Ctrl/⌘ + Enter</b> to send.</span>
+        <span class="hint">Tip: Press <b>Enter</b> to send, <b>Shift+Enter</b> for a new line.</span>
         <span class="hint" id="status">Ready</span>
       </div>
     </div>
@@ -221,11 +238,20 @@
     }
   }
 
+  // Button click
   $("send").addEventListener("click", send);
-  $("prompt").addEventListener("keydown", (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") send();
+
+  // ENTER sends, SHIFT+ENTER newline
+  const promptEl = $("prompt");
+  promptEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // stop newline
+      send();
+    }
+    // Shift+Enter will insert a newline naturally
   });
   </script>
 </body>
 </html>
+
 
