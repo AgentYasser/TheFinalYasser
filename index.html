@@ -5,19 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yasser GTM AI</title>
   <style>
+    :root { --pad: 16px; }
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; }
-    .row { display: flex; gap: 12px; margin-bottom: 12px; }
-    textarea { width: 100%; height: 140px; }
-    pre { white-space: pre-wrap; background:#f6f6f6; padding:12px; border-radius:8px; }
+    h1 { margin-bottom: 10px; }
+    .row { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+    textarea { width: 100%; height: 160px; padding: var(--pad); border-radius: 10px; border: 1px solid #ddd; }
+    pre { white-space: pre-wrap; background:#f6f6f6; padding: var(--pad); border-radius: 10px; border: 1px solid #eee; }
     button { padding: 10px 16px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; }
-    select { padding: 8px; }
+    select, input { padding: 8px; border-radius: 10px; border: 1px solid #ddd; }
+    .right { margin-left: auto; }
   </style>
 </head>
 <body>
   <h1>Yasser GTM AI</h1>
+
+  <!-- Presets for one-click convenience -->
+  <div class="row">
+    <label for="preset">Quick prompt</label>
+    <select id="preset">
+      <option value="">Choose…</option>
+      <option>Give me a two week GTM plan to launch uTap for F&B SMBs in Dubai.</option>
+      <option>Propose three CAPEX friendly ideas to upsell cybersecurity to our SME IoT customers.</option>
+      <option>Create a bilingual WhatsApp sequence for postpaid onboarding that cross sells eLife.</option>
+      <option>Compare our business mobile plans to du and list three differentiators to push.</option>
+      <option>Outline a one page sales kit for selling IoT fleet management to logistics SMEs in KSA.</option>
+    </select>
+    <button id="usePreset">Use</button>
+  </div>
+
   <div class="row">
     <textarea id="prompt" placeholder="Type your request here"></textarea>
   </div>
+
   <div class="row">
     <label for="lang">Language</label>
     <select id="lang">
@@ -26,41 +45,49 @@
     </select>
     <button id="send">Send</button>
   </div>
+
   <h3>Response</h3>
   <pre id="out">Waiting…</pre>
 
   <script>
-    const WEBHOOK =  https://agentyasser.github.io/TheFinalYasser/
+    // Your actual Make.com Custom Webhook URL
+    const WEBHOOK = "https://hook.eu2.make.com/x60u6br2yxb4t1413jo6et0hikvrmnv5";
 
-    async function callAgent() {
+    const SECRET = "YASSER123"; // optional shared secret
+
+    function setOut(text) {
+      document.getElementById("out").textContent = text;
+    }
+
+    document.getElementById("usePreset").addEventListener("click", () => {
+      const p = document.getElementById("preset").value;
+      if (p) document.getElementById("prompt").value = p;
+    });
+
+    document.getElementById("send").addEventListener("click", async () => {
       const prompt = document.getElementById("prompt").value.trim();
       const lang = document.getElementById("lang").value;
 
-      if (!prompt) { document.getElementById("out").textContent = "Please enter a prompt."; return; }
-
-      document.getElementById("out").textContent = "Working…";
+      if (!prompt) { setOut("Please enter a prompt."); return; }
+      setOut("Working…");
 
       try {
         const res = await fetch(WEBHOOK, {
           method: "POST",
           mode: "cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt, lang })
+          headers: { "Content-Type": "text/plain; charset=utf-8" }, // avoids preflight
+          body: JSON.stringify({ prompt, lang, secret: SECRET })
         });
 
         const text = await res.text();
-        // The Make Webhook Response returns JSON. Try to parse, otherwise show raw text.
         let data;
         try { data = JSON.parse(text); } catch { data = text; }
 
-        document.getElementById("out").textContent =
-          typeof data === "string" ? data : JSON.stringify(data, null, 2);
+        setOut(typeof data === "string" ? data : JSON.stringify(data, null, 2));
       } catch (e) {
-        document.getElementById("out").textContent = "Network error. " + e.message;
+        setOut("Network error. " + e.message);
       }
-    }
-
-    document.getElementById("send").addEventListener("click", callAgent);
+    });
   </script>
 </body>
 </html>
