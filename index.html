@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GTM Copilot for e&amp; B2B</title>
+  <title>Activation Assistant — e& B2B</title>
   <style>
     :root{
       --bg:#0f172a;           /* slate-900 */
@@ -106,7 +106,7 @@
     <div class="header">
       <div class="logo" aria-hidden="true"></div>
       <div>
-        <h1>GTM Copilot for e&amp; B2B UAE</h1>
+        <h1>Activation Assistant — e&amp; B2B UAE</h1>
         <div class="sub">Assistant for proposals, activations and next steps across Business Pro, uTap, mobile, fixed, security and events.</div>
       </div>
       <span class="pill right" id="sessionTag">session…</span>
@@ -119,8 +119,8 @@
           <label for="preset">Quick prompt</label>
           <select id="preset">
             <option value="">Choose…</option>
-            <option>Output type: SALES PLAY. 25-user office. Compare Business Pro 300 vs 1 Gbps; include Wi-Fi 6, M365, static IP; AED ranges; next 3 steps.</option>
-            <option>Output type: SALES PLAY. Retail chain (3 branches) needs faster checkout, footfall analytics, stable Wi-Fi. Use Business Pro, uTap, Wi-Fi 6, CCTV analytics; quick wins in 30 days.</option>
+            <option>Output type: ACTIVATION PLAN. 25-user office. Compare Business Pro 300 vs 1 Gbps; include Wi-Fi 6, M365, static IP; AED ranges; next 3 steps.</option>
+            <option>Output type: ACTIVATION PLAN. Retail chain (3 branches) needs faster checkout, footfall analytics, stable Wi-Fi. Use Business Pro, uTap, Wi-Fi 6, CCTV analytics; quick wins in 30 days.</option>
             <option>Output type: EVENT PLAY. Plan a GITEX booth to showcase Business Pro, uTap, Wi-Fi 6. Objectives, demos, partners, budget band, KPIs, next 3 steps.</option>
             <option>Output type: PARTNERSHIP PLAY. Co-sell merchant services with a major bank using uTap. Offer, simple commercial, activation, KPIs, next 3 steps.</option>
             <option>What is e&amp; Business Pro for SMEs. Give definition, 4 key features, who it suits, common add-ons, next 3 steps.</option>
@@ -169,8 +169,8 @@
   const HOOK_URL = "https://hook.eu2.make.com/x60u6br2yxb4t1413jo6et0hikvrmnv5";
 
   // Reuse a session across page loads so the Agent can keep context if you enable Thread ID mapping.
-  const sessionId = sessionStorage.getItem("yasser_session") || `yasser-ui-${Date.now()}`;
-  sessionStorage.setItem("yasser_session", sessionId);
+  const sessionId = sessionStorage.getItem("activation_session") || `activation-ui-${Date.now()}`;
+  sessionStorage.setItem("activation_session", sessionId);
   document.getElementById("sessionTag").textContent = sessionId;
 
   const $ = (id) => document.getElementById(id);
@@ -205,7 +205,7 @@
     const force = $("force").checked;
 
     // Optional directive to stop the Agent from asking questions
-    const directive = "Do not ask clarifying questions. Use Default Assumptions and proceed. Output type defaults to SALES PLAY unless I specify another type. Prompt: ";
+    const directive = "Do not ask clarifying questions. Use Default Assumptions and proceed. Output type defaults to ACTIVATION PLAN unless I specify another type. Prompt: ";
     const prompt = force ? (directive + raw) : raw;
 
     // Disable buttons while sending
