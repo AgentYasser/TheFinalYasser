@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yasser GTM AI — e& B2B</title>
+  <title>GTM Copilot for e&amp; B2B</title>
   <style>
     :root{
       --bg:#0f172a;           /* slate-900 */
@@ -30,17 +30,15 @@
       font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial;
       display:flex; align-items:flex-start; justify-content:center; padding:28px;
     }
-    .app{width:100%; max-width:var(--max);}
-    .header{
-      display:flex; align-items:center; gap:14px; margin-bottom:18px;
-    }
+    .app{width:100%; max-width:var(--max);}    
+    .header{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
     .logo{
       width:42px;height:42px;border-radius:12px;
       background:linear-gradient(135deg,var(--accent),var(--accent-2));
       box-shadow:var(--shadow);
     }
-    h1{font-size:22px;margin:0}
-    .sub{color:var(--muted); font-size:13px}
+    h1{font-size:24px;margin:0}
+    .sub{color:var(--muted); font-size:14px}
 
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
@@ -108,8 +106,8 @@
     <div class="header">
       <div class="logo" aria-hidden="true"></div>
       <div>
-        <h1>Yasser GTM AI — e&amp; B2B UAE</h1>
-        <div class="sub">Sales-focused copilot for Business Pro, uTap, mobile, fixed, security &amp; events.</div>
+        <h1>GTM Copilot for e&amp; B2B UAE</h1>
+        <div class="sub">Assistant for proposals, activations and next steps across Business Pro, uTap, mobile, fixed, security and events.</div>
       </div>
       <span class="pill right" id="sessionTag">session…</span>
     </div>
@@ -158,7 +156,7 @@
       </div>
 
       <!-- Response -->
-      <div class="response" id="out">Waiting…</div>
+      <div class="response" id="out" role="status" aria-live="polite">Waiting…</div>
       <div class="row" style="justify-content:space-between">
         <span class="hint">Tip: Press <b>Enter</b> to send, <b>Shift+Enter</b> for a new line.</span>
         <span class="hint" id="status">Ready</span>
@@ -253,5 +251,3 @@
   </script>
 </body>
 </html>
-
-
