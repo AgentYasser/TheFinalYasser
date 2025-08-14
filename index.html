@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Activation Assistant — e& B2B</title>
+  <title>GTM AI Agent — e& B2B</title>
   <style>
     :root{
       --bg:#0f172a;           /* slate-900 */
@@ -106,7 +106,7 @@
     <div class="header">
       <div class="logo" aria-hidden="true"></div>
       <div>
-        <h1>Activation Assistant — e&amp; B2B UAE</h1>
+        <h1>GTM AI Agent — e&amp; B2B UAE</h1>
         <div class="sub">Assistant for proposals, activations and next steps across Business Pro, uTap, mobile, fixed, security and events.</div>
       </div>
       <span class="pill right" id="sessionTag">session…</span>
@@ -168,9 +168,9 @@
   // --- Configure your Make Webhook URL ---
   const HOOK_URL = "https://hook.eu2.make.com/x60u6br2yxb4t1413jo6et0hikvrmnv5";
 
-  // Reuse a session across page loads so the Agent can keep context if you enable Thread ID mapping.
-  const sessionId = sessionStorage.getItem("activation_session") || `activation-ui-${Date.now()}`;
-  sessionStorage.setItem("activation_session", sessionId);
+  // Updated session storage to reflect GTM AI Agent naming
+  const sessionId = sessionStorage.getItem("gtm_ai_agent_session") || `gtm-ai-agent-ui-${Date.now()}`;
+  sessionStorage.setItem("gtm_ai_agent_session", sessionId);
   document.getElementById("sessionTag").textContent = sessionId;
 
   const $ = (id) => document.getElementById(id);
@@ -204,11 +204,9 @@
     const lang = $("lang").value;
     const force = $("force").checked;
 
-    // Optional directive to stop the Agent from asking questions
     const directive = "Do not ask clarifying questions. Use Default Assumptions and proceed. Output type defaults to ACTIVATION PLAN unless I specify another type. Prompt: ";
     const prompt = force ? (directive + raw) : raw;
 
-    // Disable buttons while sending
     $("send").disabled = $("clear").disabled = $("copy").disabled = true;
     setStatus("Sending…");
     setOut("Working…");
@@ -225,7 +223,7 @@
         })
       });
 
-      const text = await res.text(); // your Make Webhook Response returns text/plain
+      const text = await res.text();
       setOut(text || "(empty response)");
       setStatus(res.ok ? "Done" : `HTTP ${res.status}`);
     } catch (err) {
@@ -236,17 +234,14 @@
     }
   }
 
-  // Button click
   $("send").addEventListener("click", send);
 
-  // ENTER sends, SHIFT+ENTER newline
   const promptEl = $("prompt");
   promptEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault(); // stop newline
+      e.preventDefault();
       send();
     }
-    // Shift+Enter will insert a newline naturally
   });
   </script>
 </body>
